@@ -14,7 +14,7 @@ Reports include:
 
 ## Features
 * Read the sum of a Day, Month, Year
-* For Day you can also list an everage power (not energy) per 15 minutes
+* For Day you can also list an average power (not energy) per 15 minutes
 * For Month you can also list a daily energy report
 * CSV output for better parsing
 * PERL program to feed the output to a Mysql database
