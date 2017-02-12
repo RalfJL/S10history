@@ -34,24 +34,24 @@ Needed: login username; login password; AES secret
 ## Usage
 To use the S10history script you should first store the passwords
 in environment variables:
-export PW="your login password"
-export AES="AES secret shared with S10"
-user="mys10username"
-ip="IP addr of S10"
+export PW="your login password"<br>
+export AES="AES secret shared with S10"<br>
+user="mys10username"<br>
+ip="IP addr of S10"<br>
 
-Reading one paticular day (2017-02-17):
+Reading one paticular day (2017-02-17):<br>
 `S10history -u $user -P PW -A AES -i $ip -y 2017 -m 2 -d 17`
 
-Read only the sum of that day:
+Read only the sum of that day:<br>
 `S10history -u $user -P PW -A AES -i $ip -y 2017 -m 2 -d 17 -b`
 
-Read the sum of yesterday:
+Read the sum of yesterday:<br>
 `S10history -u $user -P PW -A AES -i $ip  -d -1 -b`
 
-Read the Month and all days of that month:
+Read the Month and all days of that month:<br>
 `S10history -u $user -P PW -A AES -i $ip -y 2017 -m 2`
 
-Read the sum of one year:
+Read the sum of one year:<br>
 `S10history -u $user -P PW -A AES -i $ip -y 2016`
 
 Put all days of one year into a Mysql database (please fill the scripts with your values):
