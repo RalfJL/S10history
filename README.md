@@ -21,19 +21,19 @@ Reports include:
 * Scripts that show some usage
 
 ## Prerequisites
-* RLOG library
+* RLOG library<br>
 This program uses the RLOG library for debug and error reporting.
 If you do not want to use the RLOG library, you will have to replace
 all rWarning, rError, ... calls with a printf call
-* RSCP protocol setup in your S10 solar power station
-Please refer to the documentation provided by E3DC
+* RSCP protocol setup in your S10 solar power station<br>
+Please refer to the documentation provided by E3DC<br>
 Needed: login username; login password; AES secret
 * Linux like OS with a gcc
 * Network connection to your S10 solar power station
 
 ## Usage
 To use the S10history script you should first store the passwords
-in environment variables:
+in environment variables:<br>
 export PW="your login password"<br>
 export AES="AES secret shared with S10"<br>
 user="mys10username"<br>
