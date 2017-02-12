@@ -54,9 +54,9 @@ Read the Month and all days of that month:<br>
 Read the sum of one year:<br>
 `S10history -u $user -P PW -A AES -i $ip -y 2016`
 
-Put all days of one year into a Mysql database (please fill the scripts with your values):
-`examples/getYearperDay.sh 2016 > Year2016perDay.txt` # reads all days to file
-`./S10toMysql.pl -dbname=myDBName -user=mySQLUser -password=PWofSQLuser Year2016perDay.txt`
+Put all days of one year into a Mysql database (please fill the scripts with your values):<br>
+`examples/getYearperDay.sh 2016 > Year2016perDay.txt` # reads all days to file<br>
+`./S10toMysql.pl -dbname=myDBName -user=mySQLUser -password=PWofSQLuser Year2016perDay.txt`<br>
 use the file to fill the database
 
 ## Issues
