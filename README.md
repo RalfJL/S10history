@@ -77,6 +77,8 @@ If you find a flaw in my calculations please report. I am more than happy to cor
 
 ## History
 
+07.2017 added switch so that UTC can be used instead of local TZ
+	S10 uses UTC only for time; did not really help with accuracy
 02.2017 Initial version
 
 ## Credits
