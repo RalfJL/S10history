@@ -55,6 +55,7 @@ int usage(const char *errstr) {
 	cerr << "Options:" << endl;
 	cerr << "--version      version string" << endl;
 	cerr << "--help         this message" << endl;
+	cerr << "--utc          use UTC instead of local timezone" << endl;
 	cerr << "--brief        brief report; sum only" << endl;
 	cerr << "--Debug num    debug level 1=Info 2= Debug" << endl;
 	cerr << "--year num     year > 2014; current year if not present" << endl;
@@ -70,7 +71,12 @@ int main(int argc, char *argv[]) {
 
 	time_t rawtime;        // used for time calculation
 	time(&rawtime);        // get current time to complete time arguments
-	struct tm *l = localtime(&rawtime);
+	//struct tm *l = localtime(&rawtime);
+	struct tm *l = gmtime(&rawtime);
+
+	if (l->tm_isdst >= 0) {
+		l->tm_isdst = -1;	// DST is not used by S10; do not interpret it
+	}
 
 	// logging
 	// RLogInit(argc, argv);
@@ -96,7 +102,8 @@ int main(int argc, char *argv[]) {
 	required_argument, 0, 'd' }, { "user",
 	required_argument, 0, 'u' }, { "password", required_argument, 0, 'p' }, { "Password",
 	required_argument, 0, 'P' }, { "aes", required_argument, 0, 'a' }, { "AES", required_argument, 0, 'A' }, { "Debug", required_argument, 0, 'D' },
-			{ "help", no_argument, 0, 'h' }, { "ip", required_argument, 0, 'i' }, { "service", required_argument, 0, 's' }, { "brief", no_argument, 0, 'b' }, };
+			{ "help", no_argument, 0, 'h' }, { "utc", no_argument, 0, 'U' }, { "ip", required_argument, 0, 'i' }, { "service", required_argument, 0, 's' }, { "brief", no_argument,
+					0, 'b' }, };
 
 	// process arguments
 	int index;
@@ -106,7 +113,7 @@ int main(int argc, char *argv[]) {
 	// turn off getopt error message
 	// opterr=1;
 	while (iarg != -1) {
-		iarg = getopt_long(argc, argv, "vhy:m:d:u:p:P:d:D:A:a:i:s:b", longopts, &index);
+		iarg = getopt_long(argc, argv, "vhUy:m:d:u:p:P:d:D:A:a:i:s:b", longopts, &index);
 		switch (iarg) {
 		case 'h':
 			return usage("");
@@ -114,6 +121,9 @@ int main(int argc, char *argv[]) {
 		case 'v':
 			rError("version 1.0");
 			return 0;
+			break;
+		case 'U':
+			putenv("TZ=UTC");
 			break;
 		case 'b':
 			brief = true;
