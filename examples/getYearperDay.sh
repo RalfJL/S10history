@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 #
 # get the sum of all days of one year from S10 solar power station
 # you can redirect that output to a file and use S10toMysql.pl to 
 # read all those values to a mysql database
 #
 # Copyright Ralf Lehmann
+# 09.2017 - set shell to bash because let is not known to some other shells
 # 02.2017 - initial version
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -27,7 +28,11 @@ PW_USER=PW		# please use export PW="your secret pw" before calling this script
 AES_SECRET=AES		# please use export AES="your aes secret" before calling this script
 PROG=../S10history
 
-alias errecho='>&2 echo'
+#alias errecho='>&2 echo'
+errecho(){
+        >&2 echo $* 
+}
+
 
 usage()
 {
@@ -54,19 +59,19 @@ if ! $PROG -u $USER -P $PW_USER -A $AES_SECRET -i $IP   -y $1; then
 	exit 1
 fi
  
-i=1;
+i=1
 while [ $i -le 366 ]; do 
-	#echo "$i"; 
-	j=4;
+	#echo "$i" 
+	j=4
 	while ! $PROG -u $USER -P $PW_USER -A $AES_SECRET -i $IP   -y $1 -m 1 -b -d $i ; do
 		errecho "WARNING: retrying connection"
-		sleep 10;
+		sleep 10
 		let j=$j-1
 		if [ $j -le 0 ]; then
 			errecho "ERROR: to many connection failiures"
 			exit 1
 		fi
 	done
-	let i=$i+1; 
+	let i=$i+1 
 done
 

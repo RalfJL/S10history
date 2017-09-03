@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # get the sum of all months of one year from S10 solar power station
 # you can redirect that output to a file and use S10toMysql.pl to 
@@ -29,7 +29,12 @@ PW_USER=PW		# please use export PW="your secret pw" before calling this script
 AES_SECRET=AES		# please use export AES="your aes secret" before calling this script
 PROG=../S10history
 
-alias errecho='>&2 echo'
+#alias errecho='>&2 echo'
+errecho(){
+        >&2 echo $* 
+}
+
+
 
 usage()
 {
@@ -56,9 +61,9 @@ if ! $PROG -u $USER -P $PW_USER -A $AES_SECRET -i $IP   -y $1; then
 	exit 1
 fi
  
-i=1;
+i=1
 while [ $i -le 12 ]; do 
-	#echo "$i"; 
+	#echo "$i" 
 	j=2
 	while ! $PROG -u $USER -P $PW_USER -A $AES_SECRET -i $IP   -y $1 -m $i -b ; do
 		errecho "WARNING: connection failed; retry"
@@ -68,6 +73,7 @@ while [ $i -le 12 ]; do
 			errecho "ERROR: too many retries; giving up"
 			exit 1
 		fi
-	let i=$i+1; 
+	done
+	let i=$i+1 
 done
 
